@@ -11,4 +11,14 @@ class TreeNode{
 }
 
 public class Tree {
+
+}
+
+class LumberJack {
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode("Dean FOS");
+        root.child = new TreeNode("DH Bio");
+        root.child.sibling = new TreeNode("DH Maths");
+    }
 }
