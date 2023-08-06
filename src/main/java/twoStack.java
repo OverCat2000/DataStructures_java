@@ -19,7 +19,60 @@ class Result {
      */
 
     public static int twoStacks(int maxSum, List<Integer> a, List<Integer> b) {
+        List<Integer> A = new ArrayList<Integer>();
+        List<Integer> B = new ArrayList<Integer>();
+        List<Integer> high = new ArrayList<Integer>();
+        List<Integer> low = new ArrayList<Integer>();
 
+        for (int i = 0; i < a.size(); i++) {
+            int val = a.get(i) + ((!A.isEmpty()) ? A.get(i - 1) : 0);
+
+            if (val > maxSum) {
+                break;
+            } else {
+                A.add(val);
+            }
+        }
+
+        for (int i = 0; i < b.size(); i++) {
+            int val = b.get(i) + ((!B.isEmpty()) ? B.get(i - 1) : 0);
+
+            if (val > maxSum) {
+                break;
+            } else {
+                B.add(val);
+            }
+        }
+
+        if (A.size() > B.size()) {
+            high = A;
+            low = B;
+        } else {
+            high = B;
+            low = A;
+        }
+
+
+        int max = 0;
+        int maxmax = 0;
+
+        for (int i = 0; i < low.size(); i++) {
+            for (int j = 0; j < low.size() - i; j++) {
+                if (low.get(low.size() - 1 - j) + high.get(high.size() - 1 - i) <= maxSum) {
+                    max = low.size() - j + high.size() - i;
+                    break;
+                }
+            }
+            if (max > maxmax) {
+                maxmax = max;
+            }
+        }
+
+        if (high.size() > maxmax) {
+            maxmax = high.size();
+        }
+
+        return maxmax;
     }
 
 }
