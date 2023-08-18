@@ -1,10 +1,10 @@
-public class myStack {
+public class MyStack {
 
     private int[] arr;
     private int top;
     public int size;
 
-    public myStack(int size) {
+    public MyStack(int size) {
         this.size = size;
         this.top = -1;
         this.arr = new int[size];
@@ -167,7 +167,7 @@ class StackRun {
     public static void main(String[] args) {
 
 
-        myStack stack = new myStack(10);
+        MyStack stack = new MyStack(10);
 
         stack.push(4);
         stack.push(15);
