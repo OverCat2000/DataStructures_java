@@ -1,24 +1,23 @@
-public class Queue {
-
-    int[] arr;
+public class MyQueue {
+    int arr[];
     int front;
     int rear;
 
-    public Queue(int size) {
+    public MyQueue(int size) {
         this.arr = new int[size];
         this.front = -1;
         this.rear = -1;
     }
 
-    public void enqueue(int item) {
+    public void enqueue(int data) {
         if (!isFull()) {
             if (isEmpty()) {
                 front++;
             }
             rear = (rear + 1) % arr.length;
-            arr[rear] = item;
+            arr[rear] = data;
         } else {
-            throw new IndexOutOfBoundsException(-1);
+            throw new IndexOutOfBoundsException();
         }
     }
 
@@ -34,7 +33,7 @@ public class Queue {
             }
             return temp;
         } else {
-            throw new IndexOutOfBoundsException(-1);
+            throw new IndexOutOfBoundsException();
         }
     }
 
@@ -43,7 +42,19 @@ public class Queue {
     }
 
     public boolean isFull() {
-        return (rear == arr.length - 1 && front == 0) || (rear + 1 == front);
+        if (rear == front - 1) {
+            return true;
+        } else if (rear == arr.length - 1 && front == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    
 }
+
+
+
+
+
+
+

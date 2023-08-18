@@ -1,10 +1,5 @@
 import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.regex.*;
 
 class Result {
 
@@ -18,7 +13,7 @@ class Result {
      *  3. INTEGER_ARRAY b
      */
 
-    public static int twoStacks(int maxSum, List<Integer> a, List<Integer> b) {
+    public static int twoStacksGame(int maxSum, List<Integer> a, List<Integer> b) {
         List<Integer> A = new ArrayList<Integer>();
         List<Integer> B = new ArrayList<Integer>();
         List<Integer> high = new ArrayList<Integer>();
@@ -77,7 +72,7 @@ class Result {
 
 }
 
-public class twoStack {
+class twoStackGameRunner {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -111,7 +106,7 @@ public class twoStack {
                 b.add(bItem);
             }
 
-            int result = Result.twoStacks(maxSum, a, b);
+            int result = Result.twoStacksGame(maxSum, a, b);
 
             bufferedWriter.write(String.valueOf(result));
             bufferedWriter.newLine();
