@@ -1,5 +1,8 @@
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Collections;
 
 public class BinarySearchTree {
     private BinaryTreeNode root;
@@ -41,7 +44,7 @@ public class BinarySearchTree {
         BinaryTreeNode temp = root;
         queue.add(temp);
 
-        while(temp != null) {
+        while (temp != null) {
 
             if (temp.left != null) {
                 queue.add(temp.left);
@@ -112,45 +115,120 @@ public class BinarySearchTree {
 
     private BinaryTreeNode deleteImp(BinaryTreeNode root, int data) {
         if (root != null) {
-            deleteImp(root.left, data);
-            deleteImp(root.right, data);
-            System.out.println(root.data);
-            if (root.data == data) {
+            if (root.data < data) {
+                root.right = deleteImp(root.right, data);
+//                System.out.println("right");
+            } else if (root.data > data) {
+                root.left = deleteImp(root.left, data);
+//                System.out.println("left");
+            } else if (root.data == data) {
                 if (root.right == null && root.left == null) {
                     root = null;
-                    System.out.println("no child");
+//                    System.out.println("no child");
                 } else if (root.right == null || root.left == null) {
                     if (root.left != null) {
                         root = root.left;
-                        System.out.println("one child");
+//                        System.out.println("one left child");
                     } else if (root.right != null) {
                         root = root.right;
-                        System.out.println("one child");
+//                        System.out.println("one right child");
                     }
+                }else if (root.right != null && root.left != null) {
+//                    System.out.println("both child");
+                    BinaryTreeNode temp = root.right;
+                    while (temp.left != null) {
+                        temp = temp.left;
+                    }
+                    delete(temp.data);
+                    root.data = temp.data;
                 }
             }
         }
+//        System.out.println("hello");
         return root;
     }
+
 
     public void delete(int data) {
         root = deleteImp(root, data);
     }
 
 
+    public void treePrintImp(BinaryTreeNode root, int n) {
+        if (root != null) {
+            String str = "\t";
+            treePrintImp(root.right, n + 1);
+            System.out.println(str.repeat(n) + root.data);
+            treePrintImp(root.left, n + 1);
+        }
+    }
 
+    public void treePrint() {
+        treePrintImp(root, 0);
+    }
 
+    public void lowestLevelImp(BinaryTreeNode root, int n, List<Integer> arr) {
+        if (root != null) {
+            lowestLevelImp(root.left, n + 1, arr);
+            arr.add(n);
+            lowestLevelImp(root.right, n + 1, arr);
+        }
+    }
 
+    public int lowestLevel() {
+        List<Integer> arr = new ArrayList<Integer>();
+        lowestLevelImp(root, 1, arr);
+        return Collections.max(arr);
+    }
 
+    @Override
+    public String toString() {
+        String output = "";
 
+        java.util.Queue<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
+        BinaryTreeNode temp = root;
+        queue.add(temp);
 
+        int parent = 0;
+        int child = 0;
+        int tab = lowestLevel();
+        for (int i = 0; i < tab; i++) {
+            output = output + " ";
+        }
+        tab = tab - 1;
 
+        while (temp != null) {
+            output = output + queue.remove().data + "  ";
+            if (temp.left != null) {
+                queue.add(temp.left);
+                child = child + 1;
+            }
+            if (temp.right != null) {
+                queue.add(temp.right);
+                child = child + 1;
+            }
+            if (parent == 0) {
+                output = output + "\n";
+                for (int i = 0; i < tab; i++) {
+                    output = output + " ";
+                }
+                tab = tab - 1;
+                parent = child;
+                child = 0;
+            }
+            parent = parent - 1;
 
+            temp = queue.peek();
+        }
+        return output;
+    }
 }
+
 
 class BinarySearchTreeRunner {
     public static void main(String[] args) {
         BinarySearchTree binarySearchTree = new BinarySearchTree();
+
         binarySearchTree.insert(32);
         binarySearchTree.insert(54);
         binarySearchTree.insert(12);
@@ -158,13 +236,16 @@ class BinarySearchTreeRunner {
         binarySearchTree.insert(17);
         binarySearchTree.insert(92);
         binarySearchTree.insert(100);
-        binarySearchTree.insert(55);
-        binarySearchTree.breadthFirstTraversal();
-        binarySearchTree.inOrderTraversal();
-        binarySearchTree.minimum();
-        binarySearchTree.maximum();
-        binarySearchTree.delete(16);
-        binarySearchTree.inOrderTraversal();
+        binarySearchTree.insert(99);
+        binarySearchTree.insert(90);
+        binarySearchTree.treePrint();
+//        System.out.println(binarySearchTree.toString());
+//        binarySearchTree.breadthFirstTraversal();
+//        binarySearchTree.inOrderTraversal();
+//        binarySearchTree.minimum();
+//        binarySearchTree.maximum();
+        binarySearchTree.delete(92);
+        binarySearchTree.treePrint();
     }
 
 }
