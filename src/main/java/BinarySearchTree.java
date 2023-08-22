@@ -100,10 +100,10 @@ public class BinarySearchTree {
 
     private void maximumImp(BinaryTreeNode root) {
         if (root != null) {
+            maximumImp(root.right);
             if (root.right == null) {
                 System.out.print(root.data);
             }
-            maximumImp(root.right);
         }
     }
 
@@ -117,34 +117,34 @@ public class BinarySearchTree {
         if (root != null) {
             if (root.data < data) {
                 root.right = deleteImp(root.right, data);
-//                System.out.println("right");
+                System.out.println("right");
             } else if (root.data > data) {
                 root.left = deleteImp(root.left, data);
-//                System.out.println("left");
+                System.out.println("left");
             } else if (root.data == data) {
                 if (root.right == null && root.left == null) {
                     root = null;
-//                    System.out.println("no child");
+                    System.out.println("no child");
                 } else if (root.right == null || root.left == null) {
                     if (root.left != null) {
                         root = root.left;
-//                        System.out.println("one left child");
+                        System.out.println("one left child");
                     } else if (root.right != null) {
                         root = root.right;
-//                        System.out.println("one right child");
+                        System.out.println("one right child");
                     }
                 }else if (root.right != null && root.left != null) {
-//                    System.out.println("both child");
+                    System.out.println("both child");
                     BinaryTreeNode temp = root.right;
                     while (temp.left != null) {
                         temp = temp.left;
                     }
-                    delete(temp.data);
+                    deleteImp(root, temp.data);
                     root.data = temp.data;
                 }
             }
         }
-//        System.out.println("hello");
+        System.out.println("hello");
         return root;
     }
 
@@ -238,6 +238,8 @@ class BinarySearchTreeRunner {
         binarySearchTree.insert(100);
         binarySearchTree.insert(99);
         binarySearchTree.insert(90);
+        binarySearchTree.insert(50);
+        binarySearchTree.insert(98);
         binarySearchTree.treePrint();
 //        System.out.println(binarySearchTree.toString());
 //        binarySearchTree.breadthFirstTraversal();
