@@ -158,7 +158,10 @@ public class BinarySearchTree {
         if (root != null) {
             String str = "\t";
             treePrintImp(root.right, n + 1);
-            System.out.println(str.repeat(n) + root.data);
+            for (int i = 0; i < n; i++) {
+                System.out.print(str);
+            }
+            System.out.println(root.data);
             treePrintImp(root.left, n + 1);
         }
     }
