@@ -106,7 +106,7 @@ public class SelectionSort {
     }
 
     static void QuickSort(int[] arr) {
-        QuickSortImp(arr, 0, arr.length - 1, arr.length - 1);
+        QuickSortImp(arr, 0, arr.length - 1);
     }
 
     static void QuickSortImp(int[] arr, int start, int pivot) {
@@ -116,30 +116,28 @@ public class SelectionSort {
 
     static void partition(int[] arr, int start, int pivot) {
         int index = start;
+        int swap = start;
+        int temp = 0;
 
         while(index < pivot) {
             if (arr[index] < arr[pivot]) {
-
+                temp = arr[index];
+                arr[index] = arr[swap];
+                arr[swap] = temp;
+                swap++;
             }
-
+            index++;
         }
-
+        temp = arr[swap];
+        arr[swap] = arr[pivot];
+        arr[pivot] = temp;
     }
 
 
 
-
-
-
-
-
-
-
-
-
-
     public static void main(String[] args) {
-        int[] arr = new int[]{12, 21, 5, 13, 100, 54};
+        int[] arr = new int[]{12, 60, 5, 13, 100, 54};
+        int[] brr = new int[]{22, 1, 4, 100, 11, 4, 33};
 //        Selection(arr);
 //        System.out.println(Arrays.toString(arr));
 //        BubbleSort(arr);
@@ -148,8 +146,9 @@ public class SelectionSort {
 //        System.out.println(Arrays.toString(arr));
 //        MergeSort(arr);
 //        System.out.println(Arrays.toString(arr));
-        QuickSort(arr);
-       System.out.println(Arrays.toString(arr));
+//        QuickSort(arr);
+       partition(brr, 0, brr.length - 1);
+       System.out.println(Arrays.toString(brr));
     }
 
 
