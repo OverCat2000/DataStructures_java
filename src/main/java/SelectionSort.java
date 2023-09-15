@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Queue;
 
 public class SelectionSort {
 
@@ -106,15 +107,18 @@ public class SelectionSort {
     }
 
     static void QuickSort(int[] arr) {
-        QuickSortImp(arr, 0, arr.length - 1);
+        QuickSortImp(arr, 0, arr.length - 1, arr.length - 1);
     }
 
-    static void QuickSortImp(int[] arr, int start, int pivot) {
-
-
+    static void QuickSortImp(int[] arr, int start, int pivot, int end) {
+            if (start < end) {
+                pivot = partition(arr, start, pivot);
+                QuickSortImp(arr, start, pivot - 1, pivot - 1);
+                QuickSortImp(arr, pivot + 1, end, end);
+            }
     }
 
-    static void partition(int[] arr, int start, int pivot) {
+    static int partition(int[] arr, int start, int pivot) {
         int index = start;
         int swap = start;
         int temp = 0;
@@ -131,13 +135,14 @@ public class SelectionSort {
         temp = arr[swap];
         arr[swap] = arr[pivot];
         arr[pivot] = temp;
+        return swap;
     }
 
 
 
     public static void main(String[] args) {
-        int[] arr = new int[]{12, 60, 5, 13, 100, 54};
-        int[] brr = new int[]{22, 1, 4, 100, 11, 4, 33};
+        int[] arr = new int[]{12, 60, 5, 13, 100, 54, 1, 42};
+        int[] brr = new int[]{12, 11};
 //        Selection(arr);
 //        System.out.println(Arrays.toString(arr));
 //        BubbleSort(arr);
@@ -145,10 +150,10 @@ public class SelectionSort {
 //        InsertionSort(arr);
 //        System.out.println(Arrays.toString(arr));
 //        MergeSort(arr);
-//        System.out.println(Arrays.toString(arr));
-//        QuickSort(arr);
-       partition(brr, 0, brr.length - 1);
-       System.out.println(Arrays.toString(brr));
+//        System.out.println(Arrays.toString(arr))
+        QuickSort(arr);
+//        partition(brr, 0, brr.length - 1);
+        System.out.println(Arrays.toString(arr));
     }
 
 
