@@ -153,6 +153,41 @@ public class BinarySearchTree {
         root = deleteImp(root, data);
     }
 
+    public BinaryTreeNode deleteByMergeImp(BinaryTreeNode root, int data) {
+        if (root != null) {
+            if (root.data > data) {
+                root.left = deleteByMergeImp(root.left, data);
+            } else if (root.data <  data) {
+                root.right = deleteByMergeImp(root.right, data);
+            } else if (root.data == data) {
+                if (root.left == null && root.right == null) {
+                    root = null;
+                } else if (root.left == null || root.right == null) {
+                    if (root.left != null) {
+                        root = root.left;
+                    } else if (root.right != null) {
+                        root = root.right;
+                    }
+                } else if (root.right != null && root.left != null) {
+                    BinaryTreeNode temp = root.right;
+                    while (temp.left != null) {
+                        temp = temp.left;
+                    }
+                    temp.left = root.left;
+                    root.left = null;
+                    root = deleteByMergeImp(root, root.data);
+                }
+            }
+        }
+        return root;
+    }
+
+    public void deleteByMerge(int data) {
+        root = deleteByMergeImp(root, data);
+    }
+
+
+
 
     public void treePrintImp(BinaryTreeNode root, int n) {
         if (root != null) {
@@ -168,6 +203,7 @@ public class BinarySearchTree {
 
     public void treePrint() {
         treePrintImp(root, 0);
+        System.out.println();
     }
 
     public void lowestLevelImp(BinaryTreeNode root, int n, List<Integer> arr) {
@@ -243,14 +279,19 @@ class BinarySearchTreeRunner {
         binarySearchTree.insert(90);
         binarySearchTree.insert(50);
         binarySearchTree.insert(98);
+        binarySearchTree.insert(85);
+        binarySearchTree.insert(91);
+        binarySearchTree.insert(110);
         binarySearchTree.treePrint();
 //        System.out.println(binarySearchTree.toString());
 //        binarySearchTree.breadthFirstTraversal();
 //        binarySearchTree.inOrderTraversal();
 //        binarySearchTree.minimum();
 //        binarySearchTree.maximum();
+//        binarySearchTree.deleteByMerge(92);
         binarySearchTree.delete(92);
         binarySearchTree.treePrint();
+        binarySearchTree.inOrderTraversal();
     }
 
 }
