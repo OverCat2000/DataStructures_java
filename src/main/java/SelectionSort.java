@@ -2,9 +2,9 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Queue;
 
-public class SelectionSort {
+class Sorting {
 
-    static void Selection(int[] arr) {
+    static void SelectionSort(int[] arr) {
 
         for (int j = 0; j < arr.length - 1; j++) {
             int max = 0;
@@ -42,20 +42,17 @@ public class SelectionSort {
     }
 
     static void InsertionSort(int[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-            int temp = arr[i];
-            int j = i;
-            //true not right
-            while (j > 0 && true) {
-                if (arr[j - 1] > temp) {
-                    arr[j] = arr[j - 1];
-                    j--;
-                }
+        for (int i = 0; i < arr.length - 1; i++) {
+            int temp = arr[i + 1];
+            int index = i;
+            while (index >= 0 && temp < arr[index]) {
+                arr[index + 1] = arr[index];
+                index--;
             }
-            arr[j - 1] = temp;
-            System.out.println(Arrays.toString(arr));
-            System.out.println(temp);
+//            index = index + 1;
+            arr[++index] = temp;
         }
+
     }
 
     static void MergeSort(int[] arr) {
@@ -141,17 +138,17 @@ public class SelectionSort {
 
 
     public static void main(String[] args) {
-        int[] arr = new int[]{12, 60, 5, 13, 100, 54, 1, 42};
+        int[] arr = new int[]{78, 100, 11, 4, 22, 15, 98};
         int[] brr = new int[]{12, 11};
 //        Selection(arr);
 //        System.out.println(Arrays.toString(arr));
 //        BubbleSort(arr);
 //        System.out.println(Arrays.toString(arr));
-//        InsertionSort(arr);
+        InsertionSort(arr);
 //        System.out.println(Arrays.toString(arr));
 //        MergeSort(arr);
 //        System.out.println(Arrays.toString(arr))
-        QuickSort(arr);
+//        QuickSort(arr);
 //        partition(brr, 0, brr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
