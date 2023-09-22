@@ -2,36 +2,32 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Queue;
 
-class Sorting {
+class SortingAlpha {
 
-    static void SelectionSort(int[] arr) {
-
-        for (int j = 0; j < arr.length - 1; j++) {
-            int max = 0;
-            int index = 0;
-
-            for (int i = 0; i < arr.length - i; i++) {
-
-                if (max < arr[i]) {
-                    max = arr[i];
-                    index = i;
+    static void SelectionSort(int arr[]) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            int min = arr[i];
+            int index = i;
+            for (int j = i; j < arr.length; j++) {
+                if (arr[j] < min) {
+                    min = arr[j];
+                    index = j;
                 }
-                int temp = arr[i];
-                arr[i] = max;
-                arr[index] = temp;
             }
+            int temp = arr[i];
+            arr[i] = min;
+            arr[index] = temp;
         }
     }
 
-    static void BubbleSort(int[] arr) {
-        for (int j = 0; j < arr.length -1; j++) {
+    static void BubbleSort(int arr[]) {
+        for (int i = 0; i < arr.length - 1; i++) {
             boolean swap = false;
-            for (int i = 0; i < arr.length - 1 - j; i++) {
-                int temp = 0;
-                if (arr[i] > arr[i + 1]) {
-                    temp = arr[i + 1];
-                    arr[i + 1] = arr[i];
-                    arr[i] = temp;
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                     swap = true;
                 }
             }
@@ -140,11 +136,11 @@ class Sorting {
     public static void main(String[] args) {
         int[] arr = new int[]{78, 100, 11, 4, 22, 15, 98};
         int[] brr = new int[]{12, 11};
-//        Selection(arr);
+//        SelectionSort(arr);
 //        System.out.println(Arrays.toString(arr));
-//        BubbleSort(arr);
+        BubbleSort(arr);
 //        System.out.println(Arrays.toString(arr));
-        InsertionSort(arr);
+//        InsertionSort(arr);
 //        System.out.println(Arrays.toString(arr));
 //        MergeSort(arr);
 //        System.out.println(Arrays.toString(arr))

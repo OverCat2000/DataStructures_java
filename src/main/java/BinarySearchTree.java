@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Collections;
 
+
 public class BinarySearchTree {
     private BinaryTreeNode root;
 
@@ -114,12 +115,15 @@ public class BinarySearchTree {
     }
 
     private BinaryTreeNode deleteImp(BinaryTreeNode root, int data) {
+//    private void deleteImp(BinaryTreeNode root, int data) {
         if (root != null) {
             if (root.data < data) {
                 root.right = deleteImp(root.right, data);
+//                deleteImp(root.right, data);
                 System.out.println("right");
             } else if (root.data > data) {
                 root.left = deleteImp(root.left, data);
+//                deleteImp(root.left, data);
                 System.out.println("left");
             } else if (root.data == data) {
                 if (root.right == null && root.left == null) {
@@ -151,6 +155,7 @@ public class BinarySearchTree {
 
     public void delete(int data) {
         root = deleteImp(root, data);
+//       deleteImp(root, data);
     }
 
     public BinaryTreeNode deleteByMergeImp(BinaryTreeNode root, int data) {
@@ -289,7 +294,8 @@ class BinarySearchTreeRunner {
 //        binarySearchTree.minimum();
 //        binarySearchTree.maximum();
 //        binarySearchTree.deleteByMerge(92);
-        binarySearchTree.delete(92);
+//        binarySearchTree.delete(92);
+        binarySearchTree.delete(99);
         binarySearchTree.treePrint();
         binarySearchTree.inOrderTraversal();
     }
